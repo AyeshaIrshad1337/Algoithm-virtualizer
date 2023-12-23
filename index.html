@@ -21,19 +21,16 @@ source.video {
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="#" >
+            <a class="navbar-brand" href="index.html" >
                 <img src="bg.png" width="50" height="50" class="d-inline-block align-left" alt="">
                 Algorithm Visualizer
               </a>
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="index.html">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
             </li>
           </ul>
         </div>
@@ -48,9 +45,9 @@ source.video {
             </div>
             <div id="card-inside">
  
-            <div id="card" class="card text-left" style="width: 40%; color: white; border: 1px solid white;  margin-top: 20%; left: 15%; padding: 2%; background: transparent;">
+            <div id="card" class="card text-left" style="width: 40%; color: white;   margin-top: 20%; left: 15%; background: transparent;">
                 <div class="card-body text-left">
-                    <h3 class="card-title text-left">Algorithm Visualizer</h3>
+                    <h1 class="card-title text-left">Algorithm Visualizer</h1>
                     <p class="card-text text-left">What would you like to see first ...</p>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button id="lineIntersection" type="button" class="btn btn-warning">Line Intersection</button>
@@ -63,7 +60,27 @@ source.video {
     </div>
      <script>
 document.getElementById('lineIntersection').addEventListener('click', function() {
-  document.getElementById('card').innerHTML = '<div class="card-body text-left"><h3 class="card-title text-left">Line Intersection</h3><p class="card-text text-left">Choose any of the one methods ...</p><div class="btn-group" role="group" aria-label="Basic example"><button id="algebra" type="button" class="btn btn-warning">Algebra</button><button id="orientation" type="button" class="btn btn-light">Orientation</button><button id="vectorization" type="button" class="btn btn-warning">Vectorization</button></div></div>';
+  document.getElementById('card-inside').innerHTML = `
+  <div class="row" style="margin-top:3%; margin-left:5%;">
+  <div class="col-sm-6 mb-3 mb-sm-0">
+    <div class="card" style="width: 20rem;">
+  <img src="Algbra.png" alt="">
+  <div class="card-body">
+    <p class="card-text">Algebra Algorithm uses the x and y intercepts of two lines to find their intersection point. The algorithm first calculates the slope and intercept of each line using the provided coordinates. Then, it checks if the slopes are equal, indicating parallel lines. If the slopes are not equal, it calculates the intersection point by solving the system of equations formed by the two lines.</p>
+    <a href="#" class="btn btn-primary">Explore</a>
+    </div>
+</div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+</div>`;
 
   document.getElementById('algebra').addEventListener('click', function() {
     document.getElementById('card-inside').innerHTML = `
