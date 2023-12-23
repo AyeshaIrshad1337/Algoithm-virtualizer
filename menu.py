@@ -6,7 +6,7 @@ import grahamscan
 import jarvismarch
 import quickelimination
 import quickandgrahamcombine
-import streamlit
+
 print('enter 1 for Intersection of  line and 2 for convexhull')
 num = int(input())
 if num==1:
