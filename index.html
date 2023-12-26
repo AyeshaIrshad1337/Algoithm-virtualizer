@@ -66,29 +66,29 @@ source.video {
 document.getElementById('lineIntersection').addEventListener('click', function() {
   document.getElementById('card-inside').innerHTML = `
   <div class="row" style="margin-top:10%; margin-left:17%; width:68%;">
-      <div class="col-sm-4 mb-3 mb-sm-0">
-      <div class="card" style="width: 20rem;">
-        <h1 style="padding-top:10%;  background-color:lightgrey; padding-bottom:5%;"><center>Algebra</center></h1>
-        <div class="card-body">
-          <p class="card-text">Algebra Algorithm uses the x and y intercepts of two lines to find their intersection point. The algorithm first calculates the slope and intercept of each line using the provided coordinates. Then, it checks if the slopes are equal, indicating parallel lines. If the slopes are not equal, it calculates the intersection point by solving the system of equations formed by the two lines.</p>
+      <div class="col-sm-4 mb-3 mb-sm-0" >
+      <div class="card" style="width: 20rem; background:transparent; color:white; border:1px solid #52D3D8;">
+        <h1 style="padding-top:10%;padding-bottom:10%; "><center>Algebra</center></h1>
+        <div class="card-body" style="background-color:white; color:black;">
+          <p class="card-text"><b>Algebra Algorithm uses the x and y intercepts of two lines to find their intersection point. The algorithm first calculates the slope and intercept of each line using the provided coordinates. Then, it checks if the slopes are equal, indicating parallel lines. If the slopes are not equal, it calculates the intersection point by solving the system of equations formed by the two lines.</b></p>
           <center><a href="#algo" id="algebra" class="btn btn-outline-primary">Explore</a></center>
         </div>
       </div>
     </div>
     <div class="col-sm-4">
-      <div class="card" style="width: 20rem;">
-        <h1 style="padding-top:10%;  background-color:lightgreen; padding-bottom:5%;"><center>Orientation</center></h1>
-        <div class="card-body">
-          <p class="card-text">The two lines intersect by checking the orientation of three points. It utilizes the concept of counterclockwise orientation to assess whether the points of one line segment are on opposite sides of the other. The counterclockwise function calculates the area formed by three points, and based on the sign of this area, it determines if the points are in counterclockwise order.</p>
+      <div class="card" style="width: 20rem; background:transparent; color:white; border:1px solid lightgreen;">
+        <h1 style="padding-top:10%; padding-bottom:10%;"><center>Orientation</center></h1>
+        <div class="card-body" style="background-color:white; color:black;">
+          <p class="card-text" ><b>The two lines intersect by checking the orientation of three points. It utilizes the concept of counterclockwise orientation to assess whether the points of one line segment are on opposite sides of the other. The counterclockwise function calculates the area formed by three points, and based on the sign of this area, it determines if the points are in counterclockwise order.</b></p>
           <center><a href="#algo" id="orientation" class="btn btn-outline-primary">Explore</a></center>
         </div>
       </div>
     </div>
     <div class="col-sm-4">
-      <div class="card" style="width: 20rem;">
-        <h1 style="padding-top:10%; background-color:lightblue; padding-bottom:5%;"><center>Vectorization</center></h1>
-        <div class="card-body">
-          <p class="card-text">The two lines, defined by pairs of points, intersect with each other. It employs a Point class to represent 2D points and a Line class to represent line segments formed by two points. The vector_cross_product function calculates the cross product of two vectors, and the vectors_on_opposite_sides function determines if two vectors are on opposite sides of a line.</p>
+      <div class="card" style="width: 20rem; background:transparent; color:white; border:1px solid lightblue;">
+        <h1 style="padding-top:10%;  padding-bottom:10%;"><center>Vectorization</center></h1>
+        <div class="card-body" style="background-color:white; color:black;">
+          <p class="card-text"><b>The two lines, defined by pairs of points, intersect with each other. It employs a Point class to represent 2D points and a Line class to represent line segments formed by two points. The vector_cross_product function calculates the cross product of two vectors, and the vectors_on_opposite_sides function determines if two vectors are on opposite sides of a line.</b></p>
           <center><a href="#algo" id="vector" class="btn btn-outline-primary">Explore</a></center>
         </div>
       </div>
@@ -165,7 +165,7 @@ document.getElementById('randomButton').addEventListener('click', function() {
 })
 document.getElementById('orientation').addEventListener('click',function(){
   document.getElementById('algo').innerHTML=`<div class="card" style="height:600px; width:80%; margin:3% 10% 3% 10%;">
-  <h2 class="card-header">Algorithm: <span style="font-size:25px; color:#52D3D8;"><i>Orientation</i></span></h2>
+  <h2 class="card-header">Algorithm: <span style="font-size:25px; color:lightgreen;"><i>Orientation</i></span></h2>
   <div class="card-body">
     <div class="alert alert-success" role="alert">
   <h4 class="alert-heading">Well done!</h4>
@@ -233,7 +233,7 @@ document.getElementById('randomButton').addEventListener('click', function() {
 })
 document.getElementById('vector').addEventListener('click',function(){
   document.getElementById('algo').innerHTML=`<div class="card" style="height:600px; width:80%; margin:3% 10% 3% 10%;">
-  <h2 class="card-header">Algorithm: <span style="font-size:25px; color:#52D3D8;"><i>Vectorization</i></span></h2>
+  <h2 class="card-header">Algorithm: <span style="font-size:25px; color:lightblue;"><i>Vectorization</i></span></h2>
   <div class="card-body">
     <div class="alert alert-success" role="alert">
   <h4 class="alert-heading">Well done!</h4>
@@ -314,13 +314,13 @@ document.getElementById('convexHull').addEventListener('click', function() {
       <div class="d-block w-100" >
      <div class="row">
         <div class="col-sm-4" style="margin-left:20%; width: 400px;">
-      <div class="card" >
-        <h1 style="padding-top:10%;  background-color:lightgrey; padding-bottom:5%;"><center>BruteForce</center></h1>
-        <div class="card-body">
-          <p class="card-text">the algorithm
+      <div class="card" style="background:transparent; color:white; border:1px solid lightblue;">
+        <h1 style="padding-top:10%; color:white; padding-bottom:10%;"><center>BruteForce</center></h1>
+        <div class="card-body"style="background-color:white; color:black;">
+          <p class="card-text" ><b>The algorithm
 employs a brute-force method to identify the convex hull. TThe final convex hull is obtained
 by iteratively merging the convex hulls of the divided sets. The algorithm dynamically plots the points
-and the evolving convex hull to visualize the intermediate steps.</p>
+and the evolving convex hull to visualize the intermediate steps.</b></p>
           <center><a href="#algo" id="bruteforce" class="btn btn-outline-primary">Explore</a></center>
         </div>
       </div>
