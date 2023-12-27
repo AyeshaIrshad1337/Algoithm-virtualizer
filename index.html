@@ -8,6 +8,46 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script> 
 </head>
 <style>
+    a#research{
+      border: 2px solid mediumpurple;
+      color:mediumpurple;
+    }
+    a#research:hover {
+      color:white;
+      background-color: mediumpurple;
+    }
+    a#bruteforce{
+      border: 2px solid rgb(41, 147, 182);
+      color:rgb(41, 147, 182);
+    }
+    a#bruteforce:hover {
+      color:white;
+      background-color: rgb(41, 147, 182);
+    }
+    a#graham{
+      border: 2px solid rgb(84, 211, 84);
+      color: rgb(84, 211, 84);
+    }
+    a#graham:hover {
+      color:white;
+      background-color: rgb(84, 211, 84);
+    }
+    a#jarvis{
+      border: 2px solid rgb(40, 146, 212);
+      color: rgb(40, 146, 212);
+    }
+    a#jarvis:hover {
+      color:white;
+      background-color: rgb(40, 146, 212);
+    }
+    a#quickelimation{
+      border: 2px solid lightseagreen;
+      color: lightseagreen;
+    }
+    a#quickelimation:hover {
+      color:white;
+      background-color: lightseagreen;
+    }
 source.video {
     height: 10%;
     width: 30%;
@@ -317,19 +357,16 @@ document.getElementById('convexHull').addEventListener('click', function() {
       <div class="card" style="background:transparent; color:white; border:1px solid lightblue;">
         <h1 style="padding-top:10%; color:white; padding-bottom:10%;"><center>BruteForce</center></h1>
         <div class="card-body"style="background-color:white; color:black;">
-          <p class="card-text" ><b>The algorithm
-employs a brute-force method to identify the convex hull. TThe final convex hull is obtained
-by iteratively merging the convex hulls of the divided sets. The algorithm dynamically plots the points
-and the evolving convex hull to visualize the intermediate steps.</b></p>
+          <p class="card-text" ><b>Efficiently computes convex hull in the Euclidean plane, sorting points by x-coordinates and using brute force for small sets. Merging employs upper and lower tangents, integrates Graham Scan, and dynamically visualizes intermediate steps.</b></p>
           <center><a href="#algo" id="bruteforce" class="btn btn-outline-primary">Explore</a></center>
         </div>
       </div>
     </div>
     <div class="col-sm-4" style="width: 400px;">
-      <div class="card">
-        <h1 style="padding-top:10%;  background-color:lightgrey; padding-bottom:5%;"><center>GrahamScan</center></h1>
-        <div class="card-body">
-          <p class="card-text">Algebra Algorithm uses the x and y intercepts of two lines to find their intersection point. The algorithm first calculates the slope and intercept of each line using the provided coordinates. Then, it checks if the slopes are equal, indicating parallel lines. If the slopes are not equal, it calculates the intersection point by solving the system of equations formed by the two lines.</p>
+      <div class="card" style="background:transparent; color:white; border:1px solid lightgreen;">
+        <h1 style="padding-top:10%;  padding-bottom:10%;"><center>GrahamScan</center></h1>
+        <div class="card-body" style="background-color:white; color:black;">
+          <p class="card-text"><b>Efficiently computes the convex hull in the plane by selecting the lowest y-coordinate point as the pivot. Sorting points based on polar angles, it uses a stack to incrementally form the convex hull in a counterclockwise manner. With a time complexity of O(n log n), it is well-suited for large datasets.</b></p>
           <center><a href="#algo" id="graham" class="btn btn-outline-primary">Explore</a></center>
         </div>
       </div>
@@ -341,19 +378,19 @@ and the evolving convex hull to visualize the intermediate steps.</b></p>
       <div class="d-block w-100" >
      <div class="row">
         <div class="col-sm-4" style="margin-left:20%; width: 400px;">
-      <div class="card">
-        <h1 style="padding-top:10%;  background-color:lightgrey; padding-bottom:5%;"><center>JarvisMarch</center></h1>
-        <div class="card-body">
-          <p class="card-text">Algebra Algorithm uses the x and y intercepts of two lines to find their intersection point. The algorithm first calculates the slope and intercept of each line using the provided coordinates. Then, it checks if the slopes are equal, indicating parallel lines. If the slopes are not equal, it calculates the intersection point by solving the system of equations formed by the two lines.</p>
+      <div class="card" style="background:transparent; color:white; border:1px solid lightskyblue;">
+        <h1 style="padding-top:10%; padding-bottom:10%;"><center>JarvisMarch</center></h1>
+        <div class="card-body" style="background-color:white; color:black;">
+          <p class="card-text"><b>Iteratively constructs the convex hull using the Gift Wrapping algorithm, selecting points with the smallest polar angles. Begins with the lowest Y-coordinate point as the starting hull point, proceeding counterclockwise until returning to the starting point. Despite simplicity, its time complexity is O(nh), making it less efficient than some alternatives but valuable for its ease of implementation.</b></p>
           <center><a href="#algo" id="jarvis" class="btn btn-outline-primary">Explore</a></center>
         </div>
       </div>
     </div>
     <div class="col-sm-4" style="width: 400px;">
-      <div class="card">
-        <h1 style="padding-top:10%;  background-color:lightgrey; padding-bottom:5%;"><center>QuickElimination</center></h1>
-        <div class="card-body">
-          <p class="card-text">Algebra Algorithm uses the x and y intercepts of two lines to find their intersection point. The algorithm first calculates the slope and intercept of each line using the provided coordinates. Then, it checks if the slopes are equal, indicating parallel lines. If the slopes are not equal, it calculates the intersection point by solving the system of equations formed by the two lines.</p>
+      <div class="card" style="background:transparent; color:white; border:1px solid lightseagreen;">
+        <h1 style="padding-top:10%; padding-bottom:10%;"><center>QuickElimination</center></h1>
+        <div class="card-body" style="background:white; color:black;">
+          <p class="card-text"><b>Efficiently computes the convex hull in the plane by identifying extreme points with minimum and maximum x-coordinates. Utilizes the recursive quickHull function to select points with maximum distance from the current line segment, dynamically updating the hull set. Achieves efficiency through strategic set division based on positions relative to line segments, providing a visual representation of the convex hull.</b></p>
           <center><a href="#algo" id="quickelimation" class="btn btn-outline-primary">Explore</a></center>
         </div>
       </div>
@@ -364,11 +401,11 @@ and the evolving convex hull to visualize the intermediate steps.</b></p>
     <div class="carousel-item" >
       <div class="d-block w-100" >
       <div class="col-sm-4" style="margin-left:33%; width: 400px;">
-      <div class="card">
-        <h1 style="padding-top:10%;  background-color:lightgrey; padding-bottom:5%;"><center>Reseaerch Based</center></h1>
-        <div class="card-body">
-          <p class="card-text">Algebra Algorithm uses the x and y intercepts of two lines to find their intersection point. The algorithm first calculates the slope and intercept of each line using the provided coordinates. Then, it checks if the slopes are equal, indicating parallel lines. If the slopes are not equal, it calculates the intersection point by solving the system of equations formed by the two lines.</p>
-          <center><a href="#algo" id="research" class="btn btn-outline-primary">Explore</a></center>
+      <div class="card" style="background:transparent; color:white; border:1px solid mediumpurple;">
+        <h1 style="padding-top:10%;  padding-bottom:10%;"><center>Reseaerch Based</center></h1>
+        <div class="card-body" style="background:white; color:black;">
+          <p class="card-text"><b>Efficiently computes the convex hull of two-dimensional points by integrating QuickHull and Graham Scan methods. Identifies extreme points with QuickHull, discards interior points, and employs Graham Scan for correct ordering. The merging step combines convex hulls, enhancing robustness and computational efficiency for diverse point distributions.</b></p>
+          <center><a href="#algo" id="research" class="btn btn-outline-primary" >Explore</a></center>
         </div>
       </div>
     </div>
@@ -384,6 +421,75 @@ and the evolving convex hull to visualize the intermediate steps.</b></p>
     <span class="visually-hidden">Next</span>
   </button>
 </div>`;
+document.getElementById('research').addEventListener('click',function(){
+  document.getElementById('algo').innerHTML=`<div class="card" style="height:600px; width:80%; margin:3% 10% 3% 10%;">
+  <h2 class="card-header">Algorithm: <span style="font-size:25px; color:mediumpurple;"><i>Research Algorithm</i></span></h2>
+  <div class="card-body">
+    <div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">Well done!</h4>
+  <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+  <hr>
+  <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+</div>
+    <div class="card-body">
+          
+          <p class="card-text">Enter the coordinates for Line 1 and Line 2:</p>
+          <div class="row">
+            <div class="col">
+              <label for="line1Point1X">Line 1 Point 1 X:</label>
+              <input type="number" id="line1Point1X" class="transparent-input">
+            </div>
+            <div class="col">
+              <label for="line1Point1Y">Line 1 Point 1 Y:</label>
+              <input type="number" id="line1Point1Y" class="transparent-input">
+            </div>
+            <div class="col">
+              <label for="line1Point2X">Line 1 Point 2 X:</label>
+              <input type="number" id="line1Point2X" class="transparent-input">
+            </div>
+            <div class="col">
+              <label for="line1Point2Y">Line 1 Point 2 Y:</label>
+              <input type="number" id="line1Point2Y" class="transparent-input">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="line2Point1X">Line 2 Point 1 X:</label>
+              <input type="number" id="line2Point1X" class="transparent-input">
+            </div>
+            <div class="col">
+              <label for="line2Point1Y">Line 2 Point 1 Y:</label>
+              <input type="number" id="line2Point1Y" class="transparent-input">
+            </div>
+            <div class="col">
+              <label for="line2Point2X">Line 2 Point 2 X:</label>
+              <input type="number" id="line2Point2X" class="transparent-input">
+            </div>
+            <div class="col">
+              <label for="line2Point2Y">Line 2 Point 2 Y:</label>
+              <input type="number" id="line2Point2Y" class="transparent-input">
+            </div>
+          </div>
+          <div class="btn-group" role="group" aria-label="Basic example" style="margin-top:2%;">
+            <button id="randomButton" type="button" class="btn btn-primary">Generate Random Numbers</button>
+            <button type="button" class="btn btn-danger">Run Algorithm &#128640;</button>
+          </div>
+        </div>
+   </div>
+</div>`;
+document.getElementById('randomButton').addEventListener('click', function() {
+      // Generate random numbers and populate the input fields
+      document.getElementById('line1Point1X').value = Math.floor(Math.random() * 100);
+      document.getElementById('line1Point1Y').value = Math.floor(Math.random() * 100);
+      document.getElementById('line1Point2X').value = Math.floor(Math.random() * 100);
+      document.getElementById('line1Point2Y').value = Math.floor(Math.random() * 100);
+      document.getElementById('line2Point1X').value = Math.floor(Math.random() * 100);
+      document.getElementById('line2Point1Y').value = Math.floor(Math.random() * 100);
+      document.getElementById('line2Point2X').value = Math.floor(Math.random() * 100);
+      document.getElementById('line2Point2Y').value = Math.floor(Math.random() * 100);
+    });
+})
+
 });
 
 
