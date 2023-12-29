@@ -62,7 +62,7 @@ source.video {
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <a class="navbar-brand" href="index.html" >
-                <img src="bg.png" width="50" height="50" class="d-inline-block align-left" alt="">
+                <img src="/static/bg.png" width="50" height="50" class="d-inline-block align-left" alt="">
                 Algorithm Visualizer
               </a>
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -78,10 +78,10 @@ source.video {
      <div class="card" style="background-color:black;border: 1px solid black; border-radius: 0px; height: 697.3px;">
         <main>
             <video autoplay Loop muted playsinline style="position: absolute; width: 100%; height: 696px; object-fit:cover;" id="bgVideo">
-              <source src="bgvideo.mp4" type="video/mp4">
+              <source src="/static/bgvideo.mp4" type="video/mp4">
             </video>
             <div style="position: absolute; top: 0; left: 0;">
-              <img src="top-left-img.png" alt="">
+              <img src="/static/top-left-img.png" alt="">
             </div>
             <div id="card-inside">
  
@@ -146,51 +146,55 @@ document.getElementById('lineIntersection').addEventListener('click', function()
   <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
 </div>
     <div class="card-body">
-          
+      <form id="algebra-form" name="algebra" action="/algebra" method="post">      
           <p class="card-text">Enter the coordinates for Line 1 and Line 2:</p>
           <div class="row">
             <div class="col">
               <label for="line1Point1X">Line 1 Point 1 X:</label>
-              <input type="number" id="line1Point1X" class="transparent-input">
+              <input type="number" name="line1Point1X" id="line1Point1X" class="transparent-input">
             </div>
             <div class="col">
               <label for="line1Point1Y">Line 1 Point 1 Y:</label>
-              <input type="number" id="line1Point1Y" class="transparent-input">
+              <input type="number" id="line1Point1Y" name="line1Point1Y" class="transparent-input">
             </div>
             <div class="col">
               <label for="line1Point2X">Line 1 Point 2 X:</label>
-              <input type="number" id="line1Point2X" class="transparent-input">
+              <input type="number" id="line1Point2X" name="line1Point2X" class="transparent-input">
             </div>
             <div class="col">
               <label for="line1Point2Y">Line 1 Point 2 Y:</label>
-              <input type="number" id="line1Point2Y" class="transparent-input">
+              <input type="number" name="line1Point2Y" id="line1Point2Y" class="transparent-input">
             </div>
           </div>
           <div class="row">
             <div class="col">
               <label for="line2Point1X">Line 2 Point 1 X:</label>
-              <input type="number" id="line2Point1X" class="transparent-input">
+              <input type="number" name="line2Point1X" id="line2Point1X" class="transparent-input">
             </div>
             <div class="col">
               <label for="line2Point1Y">Line 2 Point 1 Y:</label>
-              <input type="number" id="line2Point1Y" class="transparent-input">
+              <input type="number" name="line2Point1Y" id="line2Point1Y" class="transparent-input">
             </div>
             <div class="col">
               <label for="line2Point2X">Line 2 Point 2 X:</label>
-              <input type="number" id="line2Point2X" class="transparent-input">
+              <input type="number" name="line2Point2X" id="line2Point2X" class="transparent-input">
             </div>
             <div class="col">
               <label for="line2Point2Y">Line 2 Point 2 Y:</label>
-              <input type="number" id="line2Point2Y" class="transparent-input">
+              <input type="number" name="line2Point2Y" id="line2Point2Y" class="transparent-input">
             </div>
           </div>
           <div class="btn-group" role="group" aria-label="Basic example" style="margin-top:2%;">
             <button id="randomButton" type="button" class="btn btn-primary">Generate Random Numbers</button>
-            <button type="button" class="btn btn-danger">Run Algorithm &#128640;</button>
+            <button type="button" id="runAlgorithm" class="btn btn-danger">Run Algorithm &#128640;</button>
+
           </div>
         </div>
    </div>
-</div>`;
+</div>
+<div class="card" style="height:600px; width:80%; margin:3% 10% 3% 10%;">
+  <img id="algebra-image" src="">
+  </div>`;
 document.getElementById('randomButton').addEventListener('click', function() {
       // Generate random numbers and populate the input fields
       document.getElementById('line1Point1X').value = Math.floor(Math.random() * 100);
@@ -340,7 +344,34 @@ document.getElementById('randomButton').addEventListener('click', function() {
     });
 })
   });
+  document.getElementById('runAlgorithm').addEventListener('click', function () {
+  // Get form data
+  var formData = new FormData(document.getElementById('algebra-form'));
 
+  // Make a POST request to the server
+  fetch('/algebra', {
+    method: 'POST',
+    body: formData
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();  // Assuming the server returns JSON with the image URL
+    })
+    .then(data => {
+      // Check if the server returned an image_url
+      if (!data.image_url) {
+        throw new Error('Server did not return an image_url');
+      }
+
+      // Update the image source with the URL received from the server
+      document.getElementById('algebra-image').src = data.image_url;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+});
 
 document.getElementById('convexHull').addEventListener('click', function() {
   document.getElementById('card').innerHTML = `<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 1200px;margin-left:-10%; height:500px; margin-top:-30%;">

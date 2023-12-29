@@ -1,4 +1,7 @@
+import io
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+import seaborn as sns
 def find_slope_and_intercept(x1, y1, x2, y2):
     m = (y2 - y1) / (x2 - x1)
     b = y1 - m * x1
@@ -38,13 +41,19 @@ def plot_lines_and_intersection(line1x1, line1x2, line1y1, line1y2, line2x1, lin
     x4=line2x2
     y3=line2y1
     y4=line2y2
-    plt.plot([x1, x2], [y1, y2], label='Line 1')
-    plt.plot([x3, x4], [y3, y4], label='Line 2')
+    fig,ax=plt.subplots(figsize=(10,10))
+    ax=sns.set_style("darkgrid")
+    sns.lineplot([x1, x2], [y1, y2], label='Line 1')
+    sns.lineplot([x3, x4], [y3, y4], label='Line 2')
 
     if intersection_point:
-        plt.scatter(*intersection_point, color='red', label='Intersection Point')
-
+        sns.scatterplot(*intersection_point, color='red', label='Intersection Point')
+    
     plt.xlabel('X-axis')
     plt.ylabel('Y-axis')
     plt.legend()
-    plt.show()
+    canvas=FigureCanvas(fig)
+    img=io.BytesIO()
+    fig.savefig(img)
+    img.seek(0)
+    return img
