@@ -21,7 +21,7 @@ def index():
 
 @app.route('/algebra', methods=['POST'])
 def algebra():
-    if request.method == 'POST':
+        print("test")
         line1Point1X=request.form["line1Point1X"]
         line1Point1Y=request.form["line1Point1Y"]
         line1Point2X=request.form["line1Point2X"]

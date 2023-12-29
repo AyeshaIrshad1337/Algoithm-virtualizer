@@ -102,6 +102,7 @@ source.video {
     </div>
     <div Id="algo">
           </div>
+     
      <script>
 document.getElementById('lineIntersection').addEventListener('click', function() {
   document.getElementById('card-inside').innerHTML = `
@@ -186,7 +187,7 @@ document.getElementById('lineIntersection').addEventListener('click', function()
           </div>
           <div class="btn-group" role="group" aria-label="Basic example" style="margin-top:2%;">
             <button id="randomButton" type="button" class="btn btn-primary">Generate Random Numbers</button>
-            <button type="button" id="runAlgorithm" class="btn btn-danger">Run Algorithm &#128640;</button>
+            <button type="submit" id="runAlgorithm" class="btn btn-danger">Run Algorithm &#128640;</button>
 
           </div>
         </div>
@@ -345,10 +346,9 @@ document.getElementById('randomButton').addEventListener('click', function() {
 })
   });
   document.getElementById('runAlgorithm').addEventListener('click', function () {
-  // Get form data
+
   var formData = new FormData(document.getElementById('algebra-form'));
 
-  // Make a POST request to the server
   fetch('/algebra', {
     method: 'POST',
     body: formData
