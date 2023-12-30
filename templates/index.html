@@ -196,17 +196,83 @@ document.getElementById('lineIntersection').addEventListener('click', function()
 <div class="card" style="height:600px; width:80%; margin:3% 10% 3% 10%;">
   <img id="algebra-image" src="">
   </div>`;
+  let lines = {
+    l1P1X: document.getElementById('line1Point1X'),
+    l1P1Y: document.getElementById('line1Point1Y'),
+    l1P2X: document.getElementById('line1Point2X'),
+    l1P2Y: document.getElementById('line1Point2Y'),
+    l2P1X: document.getElementById('line2Point1X'),
+    l2P1Y: document.getElementById('line2Point1Y'),
+    l2P2X: document.getElementById('line2Point2X'),
+    l2P2Y: document.getElementById('line2Point2Y')
+  };
 document.getElementById('randomButton').addEventListener('click', function() {
       // Generate random numbers and populate the input fields
-      document.getElementById('line1Point1X').value = Math.floor(Math.random() * 100);
-      document.getElementById('line1Point1Y').value = Math.floor(Math.random() * 100);
-      document.getElementById('line1Point2X').value = Math.floor(Math.random() * 100);
-      document.getElementById('line1Point2Y').value = Math.floor(Math.random() * 100);
-      document.getElementById('line2Point1X').value = Math.floor(Math.random() * 100);
-      document.getElementById('line2Point1Y').value = Math.floor(Math.random() * 100);
-      document.getElementById('line2Point2X').value = Math.floor(Math.random() * 100);
-      document.getElementById('line2Point2Y').value = Math.floor(Math.random() * 100);
+      // document.getElementById('line1Point1X').value = Math.floor(Math.random() * 100);
+      // document.getElementById('line1Point1Y').value = Math.floor(Math.random() * 100);
+      // document.getElementById('line1Point2X').value = Math.floor(Math.random() * 100);
+      // document.getElementById('line1Point2Y').value = Math.floor(Math.random() * 100);
+      // document.getElementById('line2Point1X').value = Math.floor(Math.random() * 100);
+      // document.getElementById('line2Point1Y').value = Math.floor(Math.random() * 100);
+      // document.getElementById('line2Point2X').value = Math.floor(Math.random() * 100);
+      // document.getElementById('line2Point2Y').value = Math.floor(Math.random() * 100);
+      lines.l1P1X.value = Math.floor(Math.random() * 100);
+      lines.l1P1Y.value = Math.floor(Math.random() * 100);
+      lines.l1P2X.value = Math.floor(Math.random() * 100);
+      lines.l1P2Y.value = Math.floor(Math.random() * 100);
+      lines.l2P1X.value = Math.floor(Math.random() * 100);
+      lines.l2P1Y.value = Math.floor(Math.random() * 100);
+      lines.l2P2X.value = Math.floor(Math.random() * 100);
+      lines.l2P2Y.value = Math.floor(Math.random() * 100);
+
     });
+
+
+    document.getElementById('runAlgorithm').addEventListener('click', function () {
+    // get all inputs and create a FormData object
+    let formData = {
+      line1Point1X: lines.l1P1X.value,
+      line1Point1Y: lines.l1P1Y.value,
+      line1Point2X: lines.l1P2X.value,
+      line1Point2Y: lines.l1P2Y.value,
+      line2Point1X: lines.l2P1X.value,
+      line2Point1Y: lines.l2P1Y.value,
+      line2Point2X: lines.l2P2X.value,
+      line2Point2Y: lines.l2P2Y.value
+    }
+    console.log(formData, 'formData')
+
+    formData = JSON.stringify(formData)
+console.log(formData, 'formData')
+fetch('/algebra', {
+  method: 'POST',
+  headers: {
+            'Content-Type': 'application/json', // Set the content type to JSON
+        },
+  body: formData
+})
+  .then(response => {
+    console.log(response);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    return response.json();  // Assuming the server returns JSON with the image URL
+  })
+  .then(data => {
+    // Check if the server returned an image_url
+    if (!data.image_url) {
+      throw new Error('Server did not return an image_url');
+    }
+
+    // Update the image source with the URL received from the server
+    document.getElementById('algebra-image').src = data.image_url;
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+});
+
 })
 document.getElementById('orientation').addEventListener('click',function(){
   document.getElementById('algo').innerHTML=`<div class="card" style="height:600px; width:80%; margin:3% 10% 3% 10%;">
@@ -327,12 +393,12 @@ document.getElementById('vector').addEventListener('click',function(){
           </div>
           <div class="btn-group" role="group" aria-label="Basic example" style="margin-top:2%;">
             <button id="randomButton" type="button" class="btn btn-primary">Generate Random Numbers</button>
-            <button type="button" class="btn btn-danger">Run Algorithm &#128640;</button>
+            <button id="runAlgorithm" type="button" class="btn btn-danger">Run Algorithm &#128640;</button>
           </div>
         </div>
    </div>
 </div>`;
-document.getElementById('randomButton').addEventListener('click', function() {
+      document.getElementById('randomButton').addEventListener('click', function() {
       // Generate random numbers and populate the input fields
       document.getElementById('line1Point1X').value = Math.floor(Math.random() * 100);
       document.getElementById('line1Point1Y').value = Math.floor(Math.random() * 100);
@@ -343,37 +409,14 @@ document.getElementById('randomButton').addEventListener('click', function() {
       document.getElementById('line2Point2X').value = Math.floor(Math.random() * 100);
       document.getElementById('line2Point2Y').value = Math.floor(Math.random() * 100);
     });
-})
+
+    
   });
-  document.getElementById('runAlgorithm').addEventListener('click', function () {
+  
 
-  var formData = new FormData(document.getElementById('algebra-form'));
-  console.log("test");
-  fetch('/algebra', {
-    method: 'POST',
-    body: formData
   })
-    .then(response => {
-      console.log(response);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
 
-      return response.json();  // Assuming the server returns JSON with the image URL
-    })
-    .then(data => {
-      // Check if the server returned an image_url
-      if (!data.image_url) {
-        throw new Error('Server did not return an image_url');
-      }
 
-      // Update the image source with the URL received from the server
-      document.getElementById('algebra-image').src = data.image_url;
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-});
 
 document.getElementById('convexHull').addEventListener('click', function() {
   document.getElementById('card').innerHTML = `<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 1200px;margin-left:-10%; height:500px; margin-top:-30%;">

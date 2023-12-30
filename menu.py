@@ -26,14 +26,18 @@ def index():
 @app.route('/algebra', methods=['POST'])
 def algebra():
     print("test")
-    line1Point1X = request.form["line1Point1X"]
-    line1Point1Y = request.form["line1Point1Y"]
-    line1Point2X = request.form["line1Point2X"]
-    line1Point2Y = request.form["line1Point2Y"]
-    line2Point1X = request.form["line2Point1X"]
-    line2Point1Y = request.form["line2Point1Y"]
-    line2Point2X = request.form["line2Point2X"]
-    line2Point2Y = request.form["line2Point2Y"]
+
+    data = request.get_json()
+    print(data, 'json data')
+    print()
+    line1Point1X = int(data["line1Point1X"])
+    line1Point1Y = int(data["line1Point1Y"])
+    line1Point2X = int(data["line1Point2X"])
+    line1Point2Y = int(data["line1Point2Y"])
+    line2Point1X = int(data["line2Point1X"])
+    line2Point1Y = int(data["line2Point1Y"])
+    line2Point2X = int(data["line2Point2X"])
+    line2Point2Y = int(data["line2Point2Y"])
     intersect_point = line1.find_intersection_point(line1Point1X, line1Point2X, line1Point1Y, line1Point2Y, line2Point1X, line2Point2X, line2Point1Y, line2Point2Y)
     i = line1.plot_lines_and_intersection(line1Point1X, line1Point2X, line1Point1Y, line1Point2Y, line2Point1X, line2Point2X, line2Point1Y, line2Point2Y, intersect_point)
     image_path = os.path.join('static', 'image.png')
