@@ -147,7 +147,7 @@ document.getElementById('lineIntersection').addEventListener('click', function()
   <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
 </div>
     <div class="card-body">
-      <form id="algebra-form" name="algebra" action="/algebra" method="post">      
+      <form id="algebra-form" name="algebra">      
           <p class="card-text">Enter the coordinates for Line 1 and Line 2:</p>
           <div class="row">
             <div class="col">
@@ -187,7 +187,7 @@ document.getElementById('lineIntersection').addEventListener('click', function()
           </div>
           <div class="btn-group" role="group" aria-label="Basic example" style="margin-top:2%;">
             <button id="randomButton" type="button" class="btn btn-primary">Generate Random Numbers</button>
-            <button type="submit" id="runAlgorithm" class="btn btn-danger">Run Algorithm &#128640;</button>
+            <button type="button" id="runAlgorithm" class="btn btn-danger">Run Algorithm &#128640;</button>
 
           </div>
         </div>
@@ -348,15 +348,17 @@ document.getElementById('randomButton').addEventListener('click', function() {
   document.getElementById('runAlgorithm').addEventListener('click', function () {
 
   var formData = new FormData(document.getElementById('algebra-form'));
-
+  console.log("test");
   fetch('/algebra', {
     method: 'POST',
     body: formData
   })
     .then(response => {
+      console.log(response);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
+
       return response.json();  // Assuming the server returns JSON with the image URL
     })
     .then(data => {
