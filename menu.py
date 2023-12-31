@@ -60,7 +60,27 @@ def orient():
     line2Point2X = int(data["line2Point2X"])
     line2Point2Y = int(data["line2Point2Y"])
     i=line2.IntersectbyOrient(line1Point1X,line1Point1Y,line1Point2X,line1Point2Y,line2Point1X,line2Point1Y,line2Point2X,line2Point2Y)
-    image_path = os.path.join('static', 'image.png')
+    image_path = os.path.join('static', 'orient_image.png')
+    image=Image.open(BytesIO(i.getvalue()))
+    image.save(image_path)
+    image_url = image_path
+
+    return jsonify({'image_url': image_url})
+@app.route('/vector', methods=['POST'])
+def vector():
+    data = request.get_json()
+    print(data, 'json data')
+    print()
+    line1Point1X = int(data["line1Point1X"])
+    line1Point1Y = int(data["line1Point1Y"])
+    line1Point2X = int(data["line1Point2X"])
+    line1Point2Y = int(data["line1Point2Y"])
+    line2Point1X = int(data["line2Point1X"])
+    line2Point1Y = int(data["line2Point1Y"])
+    line2Point2X = int(data["line2Point2X"])
+    line2Point2Y = int(data["line2Point2Y"])
+    i=line3.Vectorisation(line1Point1X,line1Point1Y,line1Point2X,line1Point2Y,line2Point1X,line2Point1Y,line2Point2X,line2Point2Y)
+    image_path = os.path.join('static', 'vector_image.png')
     image=Image.open(BytesIO(i.getvalue()))
     image.save(image_path)
     image_url = image_path
