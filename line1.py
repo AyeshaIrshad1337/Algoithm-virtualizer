@@ -47,7 +47,7 @@ def plot_lines_and_intersection(line1x1, line1x2, line1y1, line1y2, line2x1, lin
     sns.lineplot([x3, x4], [y3, y4], label='Line 2')
 
     if intersection_point:
-        sns.scatterplot([intersection_point[0]], [intersection_point[1]], color='red', label='Intersection Point')
+        plt.scatter([intersection_point[0]], [intersection_point[1]], color='red', label='Intersection Point')
     
     plt.xlabel('X-axis')
     plt.ylabel('Y-axis')
