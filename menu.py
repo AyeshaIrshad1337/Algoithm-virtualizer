@@ -92,16 +92,42 @@ def research():
         data = request.get_json()
 
         # Extract point data based on the structure of your form
-        point_data = {}
+        point_data = []
         for key, value in data.items():
             if key.startswith("point"):
-                point_data[key] = value
+                point_data.append(value)
+                print(value)
+        point_pairs = list(zip(point_data[::2], point_data[1::2]))
 
-        x= quickandgrahamcombine.proposedConvexHull(point_data.values())
-        
+        xy = quickandgrahamcombine.proposedConvexHull(point_pairs)
+        x=quickandgrahamcombine.plot_points(point_pairs, xy)
         # Save the image
         image_path = os.path.join('static', 'research-image.png')
-        image = Image.open(BytesIO(i.getvalue()))
+        image = Image.open(BytesIO(x))
+        image.save(image_path)
+        image_url = image_path
+
+        return jsonify({'image_url': image_url})
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'error': 'An error occurred during processing'}), 500
+@app.route('/bruteforce', methods=['POST'])
+def brute():
+    try:
+        data = request.get_json()
+
+        # Extract point data based on the structure of your form
+        point_data = []
+        for key, value in data.items():
+            if key.startswith("point"):
+                point_data.append(value)
+                print(value)
+        point_pairs = list(zip(point_data[::2], point_data[1::2]))
+
+        x=bruteforce.InputandStart(point_pairs)
+        # Save the image
+        image_path = os.path.join('static', 'brute-image.png')
+        image = Image.open(BytesIO(x))
         image.save(image_path)
         image_url = image_path
 

@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from io import BytesIO
 
 def findSide(p1, p2, p):
     val = (p[1] - p1[1]) * (p2[0] - p1[0]) - (p2[1] - p1[1]) * (p[0] - p1[0])
@@ -57,32 +59,26 @@ def proposedConvexHull(points):
     return hull_quickhull + hull_grahamscan
 
 def plot_points(points, hull=None):
+    fig, ax = plt.subplots()
     x, y = zip(*points)
-    plt.scatter(x, y, color='blue', label='Points')
+    ax.scatter(x, y, color='blue', label='Points')
 
     if hull:
         hull.append(hull[0])  # Close the convex hull
         hx, hy = zip(*hull)
-        plt.plot(hx, hy, color='red', linestyle='-', linewidth=2, label='Convex Hull')
+        ax.plot(hx, hy, color='red', linestyle='-', linewidth=2, label='Convex Hull')
 
-    plt.xlabel('X-axis')
-    plt.ylabel('Y-axis')
-    plt.title('Proposed Convex Hull Visualization')
-    plt.legend()
-    plt.show()
+    ax.set_xlabel('X-axis')
+    ax.set_ylabel('Y-axis')
+    ax.set_title('Proposed Convex Hull Visualization')
+    ax.legend()
+
+    # Save the figure to a BytesIO buffer instead of displaying
+    buffer = BytesIO()
+    canvas = FigureCanvas(fig)
+    canvas.print_png(buffer)
+    plt.close(fig)
+    return buffer.getvalue()
 
 
-def InputandStart():
-     num_points = int(input("Enter the number of points: "))
-     a = []
-
-     for i in range(num_points):
-         x = float(input(f"Enter x-coordinate for point {i + 1}: "))
-         y = float(input(f"Enter y-coordinate for point {i + 1}: "))
-         a.append([x, y])
-     
-
-     convex_hull = proposedConvexHull(a)
-     plot_points(a, convex_hull)
-     
   
