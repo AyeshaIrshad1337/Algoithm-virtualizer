@@ -86,5 +86,29 @@ def vector():
     image_url = image_path
 
     return jsonify({'image_url': image_url})
+@app.route('/research', methods=['POST'])
+def research():
+    try:
+        data = request.get_json()
+
+        # Extract point data based on the structure of your form
+        point_data = {}
+        for key, value in data.items():
+            if key.startswith("point"):
+                point_data[key] = value
+
+        x= quickandgrahamcombine.proposedConvexHull(point_data.values())
+        
+        # Save the image
+        image_path = os.path.join('static', 'research-image.png')
+        image = Image.open(BytesIO(i.getvalue()))
+        image.save(image_path)
+        image_url = image_path
+
+        return jsonify({'image_url': image_url})
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'error': 'An error occurred during processing'}), 500
+
 if __name__ == '__main__':
     app.run(debug=True)
