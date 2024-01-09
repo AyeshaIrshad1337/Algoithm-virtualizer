@@ -615,6 +615,106 @@ document.getElementById('convexHull').addEventListener('click', function() {
     <span class="visually-hidden">Next</span>
   </button>
 </div>`;
+document.getElementById('bruteforce').addEventListener('click', function () {
+  document.getElementById('algo').innerHTML = `<div class="card" style="height:600px; width:80%; margin:3% 10% 3% 10%;">
+    <h2 class="card-header">Algorithm: <span style="font-size:25px; color:mediumpurple;"><i>BruteForce Algorithm</i></span></h2>
+    <div class="card-body">
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Well done!</h4>
+        <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+        <hr>
+        <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <label for="point">Enter the Number of points:</label>
+            <input type="number" id="point" class="transparent-input">
+            <button id="submitPoint" type="button" class="btn btn-warning">Submit</button>
+          </div>
+        </div>
+        <div id="section"></div>
+        <div class="card" style="height:600px; width:80%; margin:3% 10% 3% 10%;">
+  <img id="research-image" src="">
+  </div>
+      </div>
+    </div>
+  </div>`;
+
+  document.getElementById("submitPoint").addEventListener('click', function () {
+    let pointValue = document.getElementById('point').value;
+    let pointInputsHTML = '';
+    for (let i = 0; i < pointValue; i++) {
+      pointInputsHTML += `
+        <div class="row" style="margin-bottom:5px;">
+          <div class="col">
+            <label for="point${i + 1}X">Point ${i + 1} X:</label>
+            <input type="number" id="point${i + 1}X" class="transparent-input">
+          </div>
+          <div class="col">
+            <label for="point${i + 1}Y">Point ${i + 1} Y:</label>
+            <input type="number" id="point${i + 1}Y" class="transparent-input">
+          </div>
+        </div>
+      `;
+    }
+
+    document.getElementById('section').innerHTML = pointInputsHTML;
+    document.getElementById('section').innerHTML += `
+ 
+      <div class="btn-group" role="group" aria-label="Basic example" style="margin-top:2%;">
+            <button id="generateRandom" type="button" class="btn btn-primary">Generate Random Numbers</button>
+            <button id="runAlgorithm" type="button" class="btn btn-danger">Run Algorithm &#128640;</button>
+          </div>
+    `;
+    document.getElementById('generateRandom').addEventListener('click', function () {
+      for (let i = 0; i < pointValue; i++) {
+        document.getElementById(`point${i + 1}X`).value = Math.floor(Math.random() * 100);
+        document.getElementById(`point${i + 1}Y`).value = Math.floor(Math.random() * 100);
+      }
+    });
+
+    document.getElementById('runAlgorithm').addEventListener('click', function () {
+    // get all inputs and create a FormData object
+    let formData = {};
+    for (let i = 0; i < pointValue; i++) {
+      formData[`point${i + 1}X`] = parseFloat(document.getElementById(`point${i + 1}X`).value);
+      formData[`point${i + 1}Y`] = parseFloat(document.getElementById(`point${i + 1}Y`).value);
+    }
+
+    console.log('formData:', formData);
+    formData = JSON.stringify(formData)
+      console.log(formData, 'formData')
+      fetch('/bruteforce', {
+        method: 'POST',
+        headers: {
+                  'Content-Type': 'application/json', // Set the content type to JSON
+              },
+        body: formData
+      })
+        .then(response => {
+          console.log(response);
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+
+          return response.json();  // Assuming the server returns JSON with the image URL
+        })
+        .then(data => {
+          // Check if the server returned an image_url
+          if (!data.image_url) {
+            throw new Error('Server did not return an image_url');
+          }
+
+          // Update the image source with the URL received from the server
+          document.getElementById('bruteforce-image').src = data.image_url;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      });
+    });
+  });
 document.getElementById('research').addEventListener('click', function () {
   document.getElementById('algo').innerHTML = `<div class="card" style="height:600px; width:80%; margin:3% 10% 3% 10%;">
     <h2 class="card-header">Algorithm: <span style="font-size:25px; color:mediumpurple;"><i>Research Algorithm</i></span></h2>
@@ -659,7 +759,6 @@ document.getElementById('research').addEventListener('click', function () {
       `;
     }
 
-    // Append pointInputsHTML to the 'section' element
     document.getElementById('section').innerHTML = pointInputsHTML;
     document.getElementById('section').innerHTML += `
  
@@ -674,49 +773,48 @@ document.getElementById('research').addEventListener('click', function () {
         document.getElementById(`point${i + 1}Y`).value = Math.floor(Math.random() * 100);
       }
     });
-  });
-  document.getElementById('runAlgorithm').addEventListener('click', function () {
+
+    document.getElementById('runAlgorithm').addEventListener('click', function () {
     // get all inputs and create a FormData object
     let formData = {};
-        for (let i = 0; i < pointValue; i++) {
-          formData[`point${i + 1}X`] = parseFloat(document.getElementById(`point${i + 1}X`).value);
-          formData[`point${i + 1}Y`] = parseFloat(document.getElementById(`point${i + 1}Y`).value);
-        }
+    for (let i = 0; i < pointValue; i++) {
+      formData[`point${i + 1}X`] = parseFloat(document.getElementById(`point${i + 1}X`).value);
+      formData[`point${i + 1}Y`] = parseFloat(document.getElementById(`point${i + 1}Y`).value);
+    }
 
-        console.log('formData:', formData);
+    console.log('formData:', formData);
     formData = JSON.stringify(formData)
-console.log(formData, 'formData')
-fetch('/research', {
-  method: 'POST',
-  headers: {
-            'Content-Type': 'application/json', // Set the content type to JSON
-        },
-  body: formData
-})
-  .then(response => {
-    console.log(response);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
+      console.log(formData, 'formData')
+      fetch('/research', {
+        method: 'POST',
+        headers: {
+                  'Content-Type': 'application/json', // Set the content type to JSON
+              },
+        body: formData
+      })
+        .then(response => {
+          console.log(response);
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
 
-    return response.json();  // Assuming the server returns JSON with the image URL
-  })
-  .then(data => {
-    // Check if the server returned an image_url
-    if (!data.image_url) {
-      throw new Error('Server did not return an image_url');
-    }
+          return response.json();  // Assuming the server returns JSON with the image URL
+        })
+        .then(data => {
+          // Check if the server returned an image_url
+          if (!data.image_url) {
+            throw new Error('Server did not return an image_url');
+          }
 
-    // Update the image source with the URL received from the server
-    document.getElementById('research-image').src = data.image_url;
-  })
-  .catch(error => {
-    console.error('Error:', error);
+          // Update the image source with the URL received from the server
+          document.getElementById('research-image').src = data.image_url;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      });
+    });
   });
-});
-
-});
-
 });
 
 

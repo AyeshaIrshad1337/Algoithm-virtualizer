@@ -141,33 +141,33 @@ def divide(a):
 
     return merger(left_hull, right_hull)
 
-def plot_points_and_hull(points, hull):
+def plot_points_and_hull(points, hull, iteration):
     plt.clf()
     points_x, points_y = zip(*points)
     hull_x, hull_y = zip(*hull)
     plt.scatter(points_x, points_y, color='blue', marker='o')
     plt.plot(hull_x + (hull_x[0],), hull_y + (hull_y[0],), color='red')
-    plt.pause(0.1)
+
+    # Save the plot as an image
+    image_path = f'static/bruteforce_iteration_{iteration}.png'
+    plt.savefig(image_path)
+
+    # Return the path to the saved image
+    return image_path
 
 
 
-def InputandStart():
-     num_points = int(input("Enter the number of points: "))
-     a = []
+def InputandStart(a):
+    a.sort()
+    ans = divide(a)
 
-     for i in range(num_points):
-         x = float(input(f"Enter x-coordinate for point {i + 1}: "))
-         y = float(input(f"Enter y-coordinate for point {i + 1}: "))
-         a.append([x, y])
+    print('Convex Hull:')
+    for x in ans:
+        print(int(x[0]), int(x[1]))
 
+    # Generate images for each iteration
+    for i in range(len(ans)):
+        print(f'Iteration {i}')
+        plot_points_and_hull(a, ans[:i+1], i)
 
-     a.sort()
-     ans = divide(a)
-
-     print('Convex Hull:')
-     for x in ans:
-         print(int(x[0]), int(x[1]))
-
-     plt.show()
-     
-
+    plt.close()
