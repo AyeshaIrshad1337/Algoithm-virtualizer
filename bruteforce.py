@@ -89,7 +89,23 @@ def merger(a, b):
 
     return ret
 
-def bruteHull(a):
+def divide(a, iteration):
+    if len(a) <= 5:
+        return bruteHull(a, iteration)
+
+    left, right = [], []
+    start = int(len(a) / 2)
+    for i in range(start):
+        left.append(a[i])
+    for i in range(start, len(a)):
+        right.append(a[i])
+
+    left_hull = divide(left, iteration)
+    right_hull = divide(right, iteration)
+
+    return merger(left_hull, right_hull, iteration)
+
+def bruteHull(a, iteration):
     global mid
     s = set()
     for i in range(len(a)):
@@ -121,25 +137,9 @@ def bruteHull(a):
     ret = sorted(ret, key=cmp_to_key(compare))
     for i in range(n):
         ret[i] = [ret[i][0]/n, ret[i][1]/n]
-        plot_points_and_hull(a, ret)
+        plot_points_and_hull(a, ret, iteration)  # Add the 'iteration' argument
 
     return ret
-
-def divide(a):
-    if len(a) <= 5:
-        return bruteHull(a)
-
-    left, right = [], []
-    start = int(len(a) / 2)
-    for i in range(start):
-        left.append(a[i])
-    for i in range(start, len(a)):
-        right.append(a[i])
-
-    left_hull = divide(left)
-    right_hull = divide(right)
-
-    return merger(left_hull, right_hull)
 
 def plot_points_and_hull(points, hull, iteration):
     plt.clf()
@@ -159,7 +159,7 @@ def plot_points_and_hull(points, hull, iteration):
 
 def InputandStart(a):
     a.sort()
-    ans = divide(a)
+    ans = divide(a,0)
 
     print('Convex Hull:')
     for x in ans:
