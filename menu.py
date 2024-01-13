@@ -124,14 +124,13 @@ def brute():
                 print(value)
         point_pairs = list(zip(point_data[::2], point_data[1::2]))
 
-        x=bruteforce.InputandStart(point_pairs)
-        # Save the image
-        image_path = os.path.join('static', 'brute-image.png')
-        image = Image.open(BytesIO(x))
-        image.save(image_path)
-        image_url = image_path
+        x = bruteforce.InputandStart(point_pairs)
 
-        return jsonify({'image_url': image_url})
+        # Save the image content directly
+        image_bytes = BytesIO(x)
+
+        # Return the bytes-like object as response
+        return send_file(image_bytes, mimetype='image/png')
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({'error': 'An error occurred during processing'}), 500
